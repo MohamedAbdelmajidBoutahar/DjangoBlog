@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>Blog Home from Templates</h1>
-        <p>This is my blog home</p>
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+{% block content %}
+
+    {% for posts in posts %}
+        <article class="media content-section">
+            <img class="rounded-cirlce article-img" src="{{ posts.author.profile.image.url }}" alt="">
+            <div class="media-body">
+              <div class="article-metadata">
+                <a class="mr-2" href="#">{{ posts.author }}</a>
+                <small class="text-muted">{{ posts.date_posted }}</small>
+              </div>
+              <h2><a class="article-title" href="{% url 'blog-detail' posts.id %}">{{ posts.title }}</a></h2>
+              <p class="article-content">{{ posts.content }}</p>
+            </div>
+            <br>
+          </article>
+    {% endfor  %}
+{% endblock content %}
